@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { GameService } from './game.service';
 import { MapService } from './map.service';
 import { Sprite } from './sprite.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +12,10 @@ import { Sprite } from './sprite.service';
 
 export class CollisionService {
 
-  constructor(private _mapService: MapService) { }
+  constructor(private _mapService: MapService, private _gameService: GameService) { }
 
   detectBorder(sprite: Sprite, oldX: number, oldY: number, newX: number, newY: number) {
-    let OFFSET=2
+    let OFFSET=3
     let width=sprite.spriteReference.width;
     let height=sprite.spriteReference.height * sprite.scale;
 
@@ -22,7 +24,7 @@ export class CollisionService {
     let upperBound=oldY-(height/OFFSET);
     let lowerBound=oldY+(height/OFFSET);
 
-    if (leftBound<500 && newX<oldX) return true
+    if (leftBound<1 && newX<oldX) return true
     if (rightBound>this._mapService.MAX_X && newX>oldX) return true
     if (upperBound<1 && newY<oldY) return true
     if (lowerBound>this._mapService.MAX_Y && newY>oldY) return true
@@ -57,6 +59,8 @@ export class CollisionService {
           targetSprite.scale=0
         }
         else if (targetSprite.type =='predator'){
+          
+          this._gameService.state = 'gameover'
 
         }
       }

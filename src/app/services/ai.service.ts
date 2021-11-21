@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { Sprite } from './sprite.service';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Sprite, SpriteService } from './sprite.service';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,55 @@ export class AiService {
     }
     return sprite;
   }
+
+  predetorAI(targetSprite: Sprite, myX: number, myY: number, range: number){
+    let distance = Math.pow(myX-targetSprite.x, 2)+Math.pow(myY-targetSprite.y, 2)
+    if (distance<=range){
+      if (myX>=targetSprite.x){
+        targetSprite.x=targetSprite.x+10
+      }
+      else {
+        targetSprite.x=targetSprite.x-10
+      }
+      if (myY>=targetSprite.y){
+        targetSprite.y=targetSprite.y+10
+      }
+      else {
+        targetSprite.y=targetSprite.y-10
+      }
+    }
+    else {
+      return this.basicAI(targetSprite);
+    }
+    return targetSprite;
+  }
+
+
+  preyAI(targetSprite: Sprite, myX: number, myY: number, range: number){
+    let distance = Math.pow(myX-targetSprite.x, 2)+Math.pow(myY-targetSprite.y, 2)
+    if (distance<=range){
+      if (myX>=targetSprite.x){
+        targetSprite.x=targetSprite.x-10
+      }
+      else {
+        targetSprite.x=targetSprite.x+10
+      }
+      if (myY>=targetSprite.y){
+        targetSprite.y=targetSprite.y-10
+      }
+      else {
+        targetSprite.y=targetSprite.y+10
+      }
+
+    }
+    else {
+      return this.basicAI(targetSprite);
+    }
+    return targetSprite;
+  }
 }
+
+
 
 
 

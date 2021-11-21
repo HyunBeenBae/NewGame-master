@@ -72,6 +72,7 @@ coin: Sprite={
     scale:.4,
     playable:false,
     type: 'prey',
+    
   
     url: '../assets/images/coin.png',
     fps:9,
@@ -100,7 +101,7 @@ galactaknight: Sprite={
     acceleration: 0,
     scale:2,
     playable:true,
-    type: 'predetor',
+    type: 'predator',
   
     url: '../assets/images/galacta_knight.png',
     fps:9,
@@ -188,10 +189,11 @@ grass: Sprite={
   populateGalactaknight(numberToPopulate: number) {
     for (let i=0; i<numberToPopulate; i++) {
       let Galactaknight = this.galactaknight;
-      Galactaknight.x = Math.floor(Math.random()* 1500* i);
-      Galactaknight.y = Math.floor(Math.random()* 1500* i);
+      Galactaknight.x = Math.floor(Math.random()* 1500* i+700);
+      Galactaknight.y = Math.floor(Math.random()* 1500* i+200);
       this.sprites.push(JSON.parse(JSON.stringify(Galactaknight)))
     }
+    //Math.random()* 1500* i
   }  
   populateCloud(numberToPopulate: number) {
     for (let i=0; i<numberToPopulate; i++) {
